@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3001/api/auth";
+const API_URL = "https://moviebook-2.onrender.com/api/auth";
 
 const authService = {
   login: async (email, password) => {

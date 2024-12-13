@@ -24,7 +24,7 @@ const useFetchMovies = () => {
 
           // Send movies to backend to save in the database
           const saveMoviesToBackend = async () => {
-            const backendResponse = await fetch('http://localhost:3001/api/movies', {
+            const backendResponse = await fetch('https://moviebook-2.onrender.com/api/movies', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3001/api/payment";
+const API_URL = "https://moviebook-2.onrender.com/api/payment";
 
 const paymentService = {
   createPayment: async (data) => {
