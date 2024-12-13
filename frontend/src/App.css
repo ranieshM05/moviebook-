@@ -1,0 +1,97 @@
+/* App.css */
+
+/* Reset some default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  background-color: #f4f4f4; /* Light background color */
+  color: #333; /* Dark text color */
+}
+
+/* Container for the main content */
+.container {
+  max-width: 1200px; /* Limit the width of the main content */
+  margin: 0 auto; /* Center the container */
+  padding: 20px; /* Add padding */
+}
+
+/* Navbar styles */
+.navbar {
+  background-color: #333; /* Dark background for the navbar */
+  color: #fff; /* White text */
+  padding: 15px 20px; /* Add padding */
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Space out items */
+  align-items: center; /* Center items vertically */
+}
+
+.navbar a {
+  color: #fff; /* White links */
+  text-decoration: none; /* Remove underline from links */
+  margin-left: 20px; /* Space between links */
+}
+
+.navbar a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+/* Footer styles */
+.footer {
+  background-color: #333; /* Dark background for the footer */
+  color: #fff; /* White text */
+  text-align: center; /* Center the text */
+  padding: 10px 0; /* Add padding */
+  position: relative; /* Position relative for absolute child elements */
+  bottom: 0;
+  width: 100%;
+}
+
+/* Page styles */
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 10px; /* Space below headings */
+}
+
+p {
+  margin-bottom: 20px; /* Space below paragraphs */
+}
+
+/* Flex styles for movie cards */
+.flex {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping of child elements */
+  justify-content: center; /* Center items horizontally */
+}
+
+/* Movie card styling */
+.movie-card {
+  background: white; /* White background for movie cards */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  margin: 10px; /* Space between cards */
+  padding: 20px; /* Padding inside the card */
+  text-align: center; /* Center text in card */
+  width: 200px; /* Fixed width for cards */
+}
+
+/* Button styling */
+.button {
+  background-color: #28a745; /* Green button */
+  color: white; /* White text */
+  padding: 10px 20px; /* Padding */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+.button:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
+/* Add more specific styles for your components as needed */
