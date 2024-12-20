@@ -25,7 +25,7 @@ function EditProfile() {
 
     // Optionally, send the updated user data to the backend
     const token = localStorage.getItem('token');
-    await fetch('http://localhost:3001/api/auth/update-profile', {
+    await fetch('https://moviebook-5.onrender.com/api/auth/update-profile', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

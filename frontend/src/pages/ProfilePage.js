@@ -22,7 +22,7 @@ const ProfilePage = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3001/api/user/profile', {
+      const response = await fetch('https://moviebook-5.onrender.com/api/user/profile', {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,

@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (credentials) => {
     try {
-      const response = await axios.post("http://localhost:3001/api/auth/login", credentials); // Updated URL
+      const response = await axios.post("https://moviebook-5.onrender.com/api/auth/login", credentials); // Updated URL
       localStorage.setItem("token", response.data.token);
       setUser(response.data.user);
     } catch (error) {
