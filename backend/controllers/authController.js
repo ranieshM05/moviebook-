@@ -1,5 +1,5 @@
 const User = require('../Models/User');
-const bcrypt = require('bcryptjs');  // Use bcryptjs instead of bcrypt
+const bcrypt = require('bcryptjs');  // Correct: Use bcryptjs instead of bcrypt
 const jwt = require('jsonwebtoken');
 
 // Register user

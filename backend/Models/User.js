@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs'); // Changed to bcryptjs
 
 // Define the user schema
 const userSchema = new mongoose.Schema({
@@ -7,12 +7,12 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   details: { type: String },
-  profilePic: { type: String , default: ''},
+  profilePic: { type: String, default: '' },
 });
 
 // Hash password before saving the user
 userSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) return next();  // If the password isn't modified, skip hashing
+  if (!this.isModified('password')) return next(); // If the password isn't modified, skip hashing
 
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
