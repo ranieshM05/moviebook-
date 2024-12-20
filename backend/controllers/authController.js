@@ -1,5 +1,5 @@
-const User = require('../Models/User'); 
-const bcrypt = require('bcrypt');
+const User = require('../Models/User');
+const bcrypt = require('bcryptjs');  // Use bcryptjs instead of bcrypt
 const jwt = require('jsonwebtoken');
 
 // Register user
@@ -16,7 +16,7 @@ const register = async (req, res) => {
       return res.status(400).json({ message: 'User already exists' });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);  // bcryptjs works the same way as bcrypt
     const newUser = new User({ name, email, password: hashedPassword });
     await newUser.save();
 
@@ -36,7 +36,7 @@ const login = async (req, res) => {
     return res.status(400).json({ message: 'User not found' });
   }
 
-  const isMatch = await bcrypt.compare(password, user.password);
+  const isMatch = await bcrypt.compare(password, user.password);  // bcryptjs works the same way as bcrypt
   if (!isMatch) {
     return res.status(400).json({ message: 'Invalid credentials' });
   }
