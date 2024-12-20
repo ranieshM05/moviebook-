@@ -1,24 +1,52 @@
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom'; // For navigation
 
 const ProfilePage = () => {
-  const { user, login, logout } = useAuth();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate(); // Hook for navigation
   const [editing, setEditing] = useState(false);
   const [profilePic, setProfilePic] = useState(null);
   const [name, setName] = useState(user ? user.name : '');
-  const [userId] = useState(user ? user.id : '12345'); // Removed setUserId
+  const [userId] = useState(user ? user.id : '12345');
   const [details, setDetails] = useState(user ? user.details : '');
 
   const handleEdit = () => setEditing(true);
-  const handleSave = () => {
-    console.log('Saved changes:', { name, userId, details });
-    setEditing(false);
+
+  const handleSave = async () => {
+    const updatedProfile = { name, userId, details };
+
+    // If there's a profile picture, include it in the request
+    if (profilePic) {
+      updatedProfile.profilePic = profilePic;
+    }
+
+    try {
+      const response = await fetch('http://localhost:3001/api/user/profile', {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedProfile),
+      });
+
+      if (response.ok) {
+        const updatedData = await response.json();
+        console.log('Profile updated:', updatedData);
+        setEditing(false);
+      } else {
+        console.error('Failed to update profile:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error saving profile:', error);
+    }
   };
 
   const handleProfilePicChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setProfilePic(URL.createObjectURL(file));
+      setProfilePic(URL.createObjectURL(file)); // Preview the uploaded image
     }
   };
 
@@ -118,10 +146,21 @@ const ProfilePage = () => {
         </div>
       ) : (
         <div>
-          <h2>Please log in.</h2>
-          <button onClick={() => login({ name: 'User', id: '12345', details: 'Sample details' })} className="bg-blue-500 text-white p-2 rounded">
-            Login
-          </button>
+          <h2>Please log in or sign up.</h2>
+          <div className="flex space-x-4 mt-4">
+            <button
+              onClick={() => navigate('/auth/login')}
+              className="bg-blue-500 text-white p-2 rounded"
+            >
+              Login
+            </button>
+            <button
+              onClick={() => navigate('/auth/signup')}
+              className="bg-green-500 text-white p-2 rounded"
+            >
+              Sign Up
+            </button>
+          </div>
         </div>
       )}
     </div>

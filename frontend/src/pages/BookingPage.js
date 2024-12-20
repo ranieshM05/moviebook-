@@ -57,7 +57,7 @@ function BookingPage() {
                     <button
                       key={seat}
                       onClick={() => handleSeatClick(seat)}
-                      className={`w-10 h-10 rounded-md ${
+                      className={`w-12 h-12 mx-1 my-1 rounded-md ${
                         isSelected ? "bg-green-500" : "bg-gray-300"
                       } text-white hover:bg-green-400`}
                     >
