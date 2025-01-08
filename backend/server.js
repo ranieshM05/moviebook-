@@ -18,7 +18,7 @@ app.use(express.json());
 
 // API routes
 app.use("/api/movies", moviesRoutes);
-app.use("/api/auth", authRoutes); // Add this line
+app.use("/api/auth", authRoutes); 
 
 // Serve static files from the React app
 if (process.env.NODE_ENV === "production") {

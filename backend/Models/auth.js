@@ -1,25 +1,38 @@
-const User = require('../Models/User');
+const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const User = require('../Models/User');
+const router = express.Router();
 
-const registerUser = async (req, res) => {
+// Signup route
+router.post('/signup', async (req, res) => {
   const { name, email, password } = req.body;
+
   try {
-    const userExists = await User.findOne({ email });
-    if (userExists) {
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
       return res.status(400).json({ message: 'User already exists' });
     }
 
-    const user = await User.create({ name, email, password });
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-    res.status(201).json({ message: 'User registered successfully' });
+    const user = new User({
+      name,
+      email,
+      password: hashedPassword,
+    }); 
+
+    await user.save();
+    res.status(201).json({ message: 'User created successfully' });
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
   }
-};
+});
 
-const loginUser = async (req, res) => {
+// Login route
+router.post('/login', async (req, res) => {
   const { email, password } = req.body;
+
   try {
     const user = await User.findOne({ email });
     if (!user) {
@@ -31,12 +44,14 @@ const loginUser = async (req, res) => {
       return res.status(400).json({ message: 'Invalid email or password' });
     }
 
-    const token = jwt.sign({ id: user._id }, 'secret', { expiresIn: '1h' });
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: '1h',
+    });
 
     res.status(200).json({ token });
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
   }
-};
+});
 
-module.exports = { registerUser, loginUser };
+module.exports = router;
